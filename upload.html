@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Custom Paragraph</title>
+    <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Type Your Custom Paragraph (Max 7000 Chars)</h1>
+        <form id="uploadForm">
+            <div class="form-group">
+                <input type="text" id="heading" name="heading" placeholder="Heading..." required>
+            </div>
+            <div class="form-group">
+                <textarea id="content" name="content" placeholder="Paste Your Content Here..." maxlength="7000" required></textarea>
+                <p id="wordCount">Word Count: 0</p>
+            </div>
+            <div class="form-group">
+                <button type="button" id="uploadButton">Upload</button>
+            </div>
+            <a href="index.html">← Go Back</a>
+            <p>Paragraph List: <span id="paragraphCount">[Max 30]</span></p>
+            <ul id="paragraphList"></ul>
+        </form>
+        <footer>
+            <p>Developed by Balakram Tudu &copy; 2024</p>
+        </footer>
+    </div>
+    <script src="upload.js"></script>
+</body>
+</html>

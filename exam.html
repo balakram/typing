@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Typing Test</title>
+    <link rel="stylesheet" href="exam.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <h1>English Typing Test</h1>
+        <div>
+            User Name: <span id="userName"></span>
+        </div>
+        <div id="timer">01:00</div>
+        <div id="paragraph" class="paragraph-container"></div>
+        <textarea id="typingArea" placeholder="Start typing here..."></textarea>
+        <div class="button-group">
+            <button id="decreaseFontSize">A-</button>
+            <button id="increaseFontSize">A+</button>
+            <button id="restart">Restart Exam</button>
+            <button id="submit">Submit</button>
+        </div>
+        <a href="index.html"><button style="color: rgb(167, 2, 16);">←⃝ 𝓖𝓸 𝓑𝓪𝓬𝓴</button></a>
+
+        <div id="results">
+            <h2 style="color: rgb(255, 102, 0);">Your Detailed Typing Test Result</h2>
+            <tr>2000 (two thousand) key depressions for a duration of 15 (fifteen) minutes.</tr>
+            <table>
+                <tr>
+                    <th>Gross Words Per Minute (GWPM)</th>
+                    <td id="gwpm"></td>
+                </tr>
+                <tr>
+                    <th>Net Speed (WPM)</th>
+                    <td id="wpm"></td>
+                </tr>
+                <tr>
+                    <th>Total Words Typed</th>
+                    <td id="totalWords"></td>
+                </tr>
+                <tr>
+                    <th>Total key depressions</th>
+                    <td id="cpm"></td>
+                </tr>
+                <tr>
+                    <th>Total Errors</th>
+                    <td id="totalErrors"></td>
+                </tr>
+                <tr>
+                    <th>Error Rate (%)</th>
+                    <td id="errorRate"></td>
+                </tr>
+                <tr>
+                    <th>Backspace Count</th>
+                    <td id="backspaceCount"></td>
+                </tr>
+                <tr>
+                    <th>Test Duration</th>
+                    <td id="testDuration"></td>
+                </tr>
+                <tr>
+                    <th>Accuracy (%)</th>
+                    <td id="accuracy"></td>
+                </tr>
+            </table>
+            <br>
+            <button id="saveFile" style="color: rgb(0, 0, 0);background-color: rgba(131, 255, 48, 0.726);size: 14px;">𝑺𝒂𝒗𝒆 𝑹𝒆𝒔𝒖𝒍𝒕𝒔 𝒕𝒐 𝑭𝒊𝒍𝒆⬇️</button>
+        </div>
+        <footer>
+            <p>Developed by Balakram Tudu &copy; 2024</p>
+        </footer>
+        <input type="hidden" id="wordLimitValue">
+    </div>
+    <script src="exam.js"></script>
+    <script src="filesave.js"></script>
+</body>
+</html>

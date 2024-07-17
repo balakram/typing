@@ -14,12 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const typingArea = document.getElementById('typingArea');
     const resultsSection = document.getElementById('results');
+    const realTimeStats = document.getElementById('realTimeStats');
+    const showRealTimeStats = document.getElementById('showRealTimeStats');
     const decreaseFontSizeButton = document.getElementById('decreaseFontSize');
     const increaseFontSizeButton = document.getElementById('increaseFontSize');
     const saveFileButton = document.getElementById('saveFile');
     const restartButton = document.getElementById('restart');
     const submitButton = document.getElementById('submit');
     const paragraphContainer = document.getElementById('paragraph');
+    const enableBackspaceCheckbox = document.getElementById('enableBackspace');
+    const enableHighlightCheckbox = document.getElementById('enableHighlight');
 
     // Function to start the timer
     function startTimer() {
@@ -47,9 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorCount = calculateErrors(typedWords, originalText);
 
         // Calculate gross speed (GWPM), net speed (WPM), and character speed (CPM)
-        const gwpm = (typedWordCount / examData.testTime) * 60;
-        const nwpm = ((typedCharacters / 5 - errorCount) / examData.testTime) * 60;
-        const cpm = (typedCharacters / (examData.testTime * 60)) * 60;
+        const totalTimeInMinutes = (examData.testTime * 60 - timer) / 60;
+        const gwpm = (typedCharacters / 5) / totalTimeInMinutes;
+        const nwpm = ((typedCharacters / 5 - errorCount) / totalTimeInMinutes);
+        const cpm = (typedCharacters / totalTimeInMinutes);
 
         // Calculate accuracy and error rate
         const accuracy = ((typedWordCount - errorCount) / typedWordCount) * 100;
@@ -62,155 +67,201 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display results
         document.getElementById('gwpm').textContent = gwpm.toFixed(2);
         document.getElementById('wpm').textContent = nwpm.toFixed(2);
-        document.getElementById('cpm').textContent = cpm.toFixed();
         document.getElementById('totalWords').textContent = typedWordCount;
+        document.getElementById('cpm').textContent = cpm.toFixed(2);
         document.getElementById('totalErrors').textContent = errorCount;
         document.getElementById('errorRate').textContent = errorRate.toFixed(2) + '%';
-        document.getElementById('backspaceCount').textContent = backspaceCount +' Times'; // Update backspace count
-        document.getElementById('testDuration').textContent = `${testMinutes} minutes ${testSeconds} seconds`;
+        document.getElementById('backspaceCount').textContent = backspaceCount;
+        document.getElementById('testDuration').textContent = `${testMinutes}m ${testSeconds}s`;
         document.getElementById('accuracy').textContent = accuracy.toFixed(2) + '%';
 
         resultsSection.style.display = 'block';
+        clearInterval(interval);
+        typingArea.disabled = true;
     }
 
     // Function to calculate errors
     function calculateErrors(typedWords, originalWords) {
-        let errorCount = 0;
-        typedWords.forEach((word, index) => {
-            if (originalWords[index] && word !== originalWords[index]) {
-                errorCount++;
+        let errors = 0;
+        for (let i = 0; i < typedWords.length; i++) {
+            if (typedWords[i] !== originalWords[i]) {
+                errors++;
             }
+        }
+        return errors-1;//error number adjust here
+    }
+
+    // Function to update real-time statistics
+    function updateRealTimeStats() {
+        const typedText = typingArea.value.trim();
+        const typedCharacters = typedText.length;
+        const typedWords = typedText.split(/\s+/).filter(word => word !== ''); // Split typed text into words
+
+        // Calculate total typed words and errors
+        const typedWordCount = typedWords.length;
+        const errorCount = calculateErrors(typedWords, originalText);
+
+        // Calculate gross speed (GWPM), net speed (WPM), and character speed (CPM)
+        const totalTimeInMinutes = (examData.testTime * 60 - timer) / 60;
+        const gwpm = (typedCharacters / 5) / totalTimeInMinutes;
+        const nwpm = ((typedCharacters / 5 - errorCount) / totalTimeInMinutes);
+
+        // Calculate accuracy and error rate
+        const accuracy = ((typedWordCount - errorCount) / typedWordCount) * 100;
+
+        // Update real-time statistics elements
+        document.getElementById('realTimeGwpm').textContent = gwpm.toFixed(2);
+        document.getElementById('realTimeWpm').textContent = nwpm.toFixed(2);
+        document.getElementById('realTimeErrors').textContent = errorCount;
+        document.getElementById('realTimeAccuracy').textContent = accuracy.toFixed(2) + '%';
+    }
+
+    /*// Function to enable or disable highlighting & autoscroll
+    function handleHighlightAndAutoscroll() {
+        const enableHighlight = enableHighlightCheckbox.checked;
+        const typedText = typingArea.value;
+        const typedWords = typedText.trim().split(/\s+/);
+        const currentWordIndex = typedWords.length - 1;
+
+        if (enableHighlight) {
+            const words = paragraphContainer.innerText.split(' ');
+            paragraphContainer.innerHTML = words.map((word, index) => {
+                if (index === currentWordIndex) {
+                    return `<span class="highlight">${word}</span>`;
+                } else if (index < currentWordIndex) {
+                    return `<span class="typed">${word}</span>`;
+                } else {
+                    return word;
+                }
+            }).join(' ');
+
+            const highlightedWord = document.querySelector('.highlight');
+            if (highlightedWord) {
+                highlightedWord.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            paragraphContainer.innerHTML = paragraphContainer.innerText;
+        }
+    }*/
+        function handleHighlightAndAutoscroll() {
+            const enableHighlight = enableHighlightCheckbox.checked;
+            const typedText = typingArea.value;
+            const typedWords = typedText.trim().split(/\s+/);
+            const currentWordIndex = typedWords.length - 1;
+        
+            if (enableHighlight) {
+                const words = paragraphContainer.innerText.split(' ');
+                paragraphContainer.innerHTML = words.map((word, index) => {
+                    if (index === currentWordIndex) {
+                        return `<span class="highlight">${word}</span>`;
+                    } else if (index < typedWords.length) {
+                        if (typedWords[index] === originalText[index]) {
+                            return `<span class="typed">${word}</span>`;
+                        } else {
+                            return `<span class="incorrect">${word}</span>`;
+                        }
+                    } else {
+                        return word;
+                    }
+                }).join(' ');
+        
+                const highlightedWord = paragraphContainer.querySelector('.highlight');
+                if (highlightedWord) {
+                    highlightedWord.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            } else {
+                // If highlighting is disabled, reset paragraphContainer to its original text
+                paragraphContainer.innerHTML = originalText.map(word => `<span>${word}</span>`).join(' ');
+            }
+        }
+        
+        
+
+    // Event listener to handle keydown events
+    typingArea.addEventListener('keydown', (event) => {
+        if (event.key === 'Backspace') {
+            if (!enableBackspaceCheckbox.checked) {
+                event.preventDefault(); // Disable backspace
+            } else {
+                backspaceCount++; // Count backspace usage
+            }
+        }
+    });
+
+    // Event listener to handle input events
+    typingArea.addEventListener('input', () => {
+        if (showRealTimeStats.checked) {
+            updateRealTimeStats();
+        }
+        handleHighlightAndAutoscroll();
+    });
+
+    // Event listener to start the exam
+    typingArea.addEventListener('focus', () => {
+        if (!interval) {
+            startTimer();
+        }
+    });
+
+    // Event listener for the show real-time statistics checkbox
+    showRealTimeStats.addEventListener('change', () => {
+        realTimeStats.style.display = showRealTimeStats.checked ? 'block' : 'none';
+    });
+
+    // Event listener for the decrease font size button
+    decreaseFontSizeButton.addEventListener('click', () => {
+        const currentFontSize = parseFloat(window.getComputedStyle(paragraphContainer).fontSize);
+        paragraphContainer.style.fontSize = (currentFontSize - 1) + 'px';
+    });
+
+    // Event listener for the increase font size button
+    increaseFontSizeButton.addEventListener('click', () => {
+        const currentFontSize = parseFloat(window.getComputedStyle(paragraphContainer).fontSize);
+        paragraphContainer.style.fontSize = (currentFontSize + 1) + 'px';
+    });
+
+    // Event listener for the save file button
+    /*saveFileButton.addEventListener('click', () => {
+        const resultData = {
+            gwpm: document.getElementById('gwpm').textContent,
+            wpm: document.getElementById('wpm').textContent,
+            totalErrors: document.getElementById('totalErrors').textContent,
+            errorRate: document.getElementById('errorRate').textContent,
+            backspaceCount: document.getElementById('backspaceCount').textContent,
+            testDuration: document.getElementById('testDuration').textContent,
+            accuracy: document.getElementById('accuracy').textContent
+        };
+
+        const blob = new Blob([JSON.stringify(resultData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'results.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    });*/
+        // Handle save file button click
+        saveFileButton.addEventListener('click', function() {
+            const textToSave = `Original Passage:\n${examData.text}\n\nWritten Passage:\n${typingArea.value}\n\n${examData.name}'s Detailed Typing Result:\n` +
+                               `Gross Speed (GWPM): ${document.getElementById('gwpm').textContent}\n` +
+                               `Net Speed (WPM): ${document.getElementById('wpm').textContent}\n` +
+                               `Character Speed (CPM): ${document.getElementById('cpm').textContent}\n` +
+                               `Total Words Typed: ${document.getElementById('totalWords').textContent}\n` +
+                               `Total Errors: ${document.getElementById('totalErrors').textContent}\n` +
+                               `Error Rate: ${document.getElementById('errorRate').textContent}\n` +
+                               `Backspace Count: ${document.getElementById('backspaceCount').textContent}\n` +
+                               `Test Duration: ${document.getElementById('testDuration').textContent}\n` +
+                               `Accuracy: ${document.getElementById('accuracy').textContent}`;
+            saveFile(textToSave, `TypingTestResults_${examData.name}.txt`);
         });
-        return errorCount;
-    }
 
-    // Request full-screen mode
-    function requestFullscreen() {
-        const container = document.documentElement;
-        if (container.requestFullscreen) {
-            container.requestFullscreen();
-        } else if (container.mozRequestFullScreen) { // Firefox
-            container.mozRequestFullScreen();
-        } else if (container.webkitRequestFullscreen) { // Chrome, Safari and Opera
-            container.webkitRequestFullscreen();
-        } else if (container.msRequestFullscreen) { // IE/Edge
-            container.msRequestFullscreen();
-        }
-    }
-
-    // Handle F11 key for full-screen mode
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'F11') {
-            requestFullscreen();
-        }
+    // Event listener for the restart button
+    restartButton.addEventListener('click', () => {
+        location.reload();
     });
 
-    // Start in full-screen mode
-    requestFullscreen();
-
-    // Handle decrease font size button click for typing area
-    decreaseFontSizeButton.addEventListener('click', function() {
-        const currentFontSize = window.getComputedStyle(typingArea).fontSize;
-        const currentFontSizeNum = parseFloat(currentFontSize);
-        typingArea.style.fontSize = `${currentFontSizeNum - 1}px`;
-    });
-
-    // Handle increase font size button click for typing area
-    increaseFontSizeButton.addEventListener('click', function() {
-        const currentFontSize = window.getComputedStyle(typingArea).fontSize;
-        const currentFontSizeNum = parseFloat(currentFontSize);
-        typingArea.style.fontSize = `${currentFontSizeNum + 1}px`;
-    });
-
-    // Handle decrease font size button click for paragraph container
-    decreaseFontSizeButton.addEventListener('click', function() {
-        const currentFontSize = window.getComputedStyle(paragraphContainer).fontSize;
-        const currentFontSizeNum = parseFloat(currentFontSize);
-        paragraphContainer.style.fontSize = `${currentFontSizeNum - 1}px`;
-    });
-
-    // Handle increase font size button click for paragraph container
-    increaseFontSizeButton.addEventListener('click', function() {
-        const currentFontSize = window.getComputedStyle(paragraphContainer).fontSize;
-        const currentFontSizeNum = parseFloat(currentFontSize);
-        paragraphContainer.style.fontSize = `${currentFontSizeNum + 1}px`;
-    });
-
-    // Handle save file button click
-    saveFileButton.addEventListener('click', function() {
-        const textToSave = `Original Passage:\n${examData.text}\n\nWritten Passage:\n${typingArea.value}\n\nResults:\n` +
-                           `Gross Speed (GWPM): ${document.getElementById('gwpm').textContent}\n` +
-                           `Net Speed (WPM): ${document.getElementById('wpm').textContent}\n` +
-                           `Character Speed (CPM): ${document.getElementById('cpm').textContent}\n` +
-                           `Total Words Typed: ${document.getElementById('totalWords').textContent}\n` +
-                           `Total Errors: ${document.getElementById('totalErrors').textContent}\n` +
-                           `Error Rate: ${document.getElementById('errorRate').textContent}\n` +
-                           `Backspace Count: ${document.getElementById('backspaceCount').textContent}\n` +
-                           `Test Duration: ${document.getElementById('testDuration').textContent}\n` +
-                           `Accuracy: ${document.getElementById('accuracy').textContent}`;
-        saveFile(textToSave, `TypingTestResults_${examData.name}.txt`);
-    });
-
-    // Start the timer when the typing area is focused
-    typingArea.addEventListener('focus', startTimer, { once: true });
-
-    // Handle restart button click
-    restartButton.addEventListener('click', function() {
-        restartExam();
-    });
-
-    // Function to restart the exam
-    function restartExam() {
-        clearInterval(interval); // Stop the current timer
-        timer = examData.testTime * 60; // Reset time left
-        typingArea.value = ''; // Clear typing area
-        typingArea.disabled = false; // Enable typing area
-        resultsSection.style.display = 'none'; // Hide results
-        backspaceCount = 0; // Reset backspace count
-        startTime = new Date().getTime(); // Reset start time
-        document.getElementById('timer').innerText = `${examData.testTime < 10 ? '0' : ''}${examData.testTime}:00`; // Reset timer display
-        startTimer(); // Start the timer
-    }
-
-    // Handle submit button click
-    submitButton.addEventListener('click', function() {
-        clearInterval(interval);
+    // Event listener for the submit button
+    submitButton.addEventListener('click', () => {
         calculateResults();
     });
-
-    // Handle backspace key press for backspace count
-    typingArea.addEventListener('keydown', function(event) {
-        if (event.key === 'Backspace') {
-            backspaceCount++;
-        }
-    });
-
-    // Handle word limit change
-    document.getElementById('wordLimitValue').addEventListener('input', function(event) {
-        wordLimit = parseInt(event.target.value) || 35;
-        examData.wordLimit = wordLimit;
-        localStorage.setItem('examData', JSON.stringify(examData)); // Save updated word limit to localStorage
-    });
-
-    // Calculate word count in the typing area
-    typingArea.addEventListener('input', function() {
-        const typedWords = typingArea.value.trim().split(/\s+/).filter(word => word !== '');
-        const wordCount = typedWords.length;
-        const wordLimitDisplay = document.getElementById('wordLimitDisplay');
-        wordLimitDisplay.innerText = `${wordCount} / ${wordLimit}`;
-        if (wordCount >= wordLimit) {
-            typingArea.disabled = true;
-            clearInterval(interval);
-            calculateResults();
-        }
-    });
-
-    // Save file function
-    function saveFile(content, fileName) {
-        const blob = new Blob([content], { type: 'text/plain' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = fileName;
-        link.click();
-    }
 });

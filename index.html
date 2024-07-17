@@ -1,73 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Typing Test</title>
+    <title>Typing Test</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>English Typing Test</h1>
-        <form>
-            <div class="form-group">
-                <label for="name">Enter Your Name</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="testTime">Select Test Time</label>
-                <select id="testTime">
-                    <option value="1">1 Minute</option>
-                    <option value="3">3 Minutes</option>
-                    <option value="5">5 Minutes</option>
-                    <option value="10">10 Minutes</option>
-                    <option value="15">15 Minutes</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Paragraph Type</label>
+        <h1>꧁𓊈𒆜🆃🆈🅿🅸🅽🅶 🆃🅴🆂🆃𒆜𓊉꧂</h1>
+        <div class="container1">
+            <form>
+                <div class="form-group">
+                    <label for="name">Enter Your Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="testTime">Select Test Time</label>
+                    <select id="testTime">
+                        <option value="1">1 Minute</option>
+                        <option value="3">3 Minutes</option>
+                        <option value="5">5 Minutes</option>
+                        <option value="10">10 Minutes</option>
+                        <option value="15">15 Minutes</option>
+                        <option value="20">20 Minutes</option>
+                    </select>
+                </div>
+                <div class="form-group ">
+                    <label>Paragraph Type</label>
+                    <div>
+                        <input type="radio" id="defaultParagraph" name="paragraphType" value="default" checked>
+                        <label for="defaultParagraph">Default</label>
+                        <input type="radio" id="customParagraph" name="paragraphType" value="custom">
+                        <label for="customParagraph">Custom</label>
+                        <!--<a id="uploadButton" href="upload.html">Upload Custom Paragraph</a>-->
+                    </div>
+                    <div id="paragraphDropdowns">
+                        <select id="defaultParagraphList" name="defaultParagraphList">
+                            <!-- Default paragraphs will be populated here -->
+                        </select>
+                        <select id="customParagraphList" name="customParagraphList" style="display:none;">
+                            <!-- Custom paragraphs will be populated here -->
+                        </select>
+                        <br><a id="uploadButton" href="upload.html">Upload Custom Paragraph</a>
+                    </div>
+                    
+                </div>
+                <div class="checkbox-group" style="display: none;">
+                    <label for="setWordLimit">Set Word Limit</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <input type="checkbox" id="disableWordLimit" value="disable" checked> Disable&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <input type="checkbox" id="setWordLimit" value="enable"> Enable&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <input type="number" id="wordLimit" value="35" disabled>
+                </div>
+                <div style="display: none;">
+                <input type="checkbox" id="enableBackspace" checked>
+                <input type="checkbox" id="highlightAutoScroll" checked>
                 <div>
-                    <input type="radio" id="defaultParagraph" name="paragraphType" value="default" checked>
-                    <label for="defaultParagraph">Default</label>
-                    <input type="radio" id="customParagraph" name="paragraphType" value="custom">
-                    <label for="customParagraph">Custom</label>
+
                 </div>
-                <div id="paragraphDropdowns">
-                    <select id="defaultParagraphList" name="defaultParagraphList">
-                        <!-- Default paragraphs will be populated here -->
-                    </select>
-                    <select id="customParagraphList" name="customParagraphList" style="display:none;">
-                        <!-- Custom paragraphs will be populated here -->
-                    </select>
+                <!--<div class="checkbox-group">
+                    <label for="backspace">Backspace</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <input type="checkbox" id="enableBackspace" checked> Enable
+                    
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="setWordLimit">Set Word Limit</label>
-                <input type="checkbox" id="setWordLimit" value="enable"> Enable
-                <input type="number" id="wordLimit" value="35" disabled>
-            </div>
-            <div class="form-group">
-                <label for="backspace">Backspace</label>
-                <input type="checkbox" id="backspace" checked> Enable
-            </div>
-            <div class="form-group">
-                <label for="highlightAutoScroll">Highlight & Auto Scroll</label>
-                <input type="checkbox" id="highlightAutoScroll" checked> Enable
-            </div>
-            <div class="form-group">
-                <button type="button" id="startExam">Start In Exam Mode</button>
-            </div>
-            <div class="form-group">
-                <a href="https://balakram.github.io/practicemode/"><button type="button">Start Practice Mode</button></a>
-            </div>
-            <a href="upload.html">Upload Custom Paragraph</a>
-        </form>
+                <div class="checkbox-group">
+                    <label for="highlightAutoScroll">Highlight & Auto Scroll</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <input type="checkbox" id="highlightAutoScroll" checked> Enable
+                </div>-->
+                
+            </form>
+        </div>
+        <br><br><br><br>
+        <div class="button">
+            <a type="button" class="startExam" id="startExam">Start In Exam Mode</a>
+            <a href="https://balakram.github.io/practicemode/" class="startExam1" type="button">Start In Practice
+                Mode</a>
+        </div>
         <footer>
-            <p>Developed by Balakram Tudu &copy; 2024</p>
+            <p>Developed by Balakram Tudu <br>&copy; 2024 Typing Test</p>
         </footer>
     </div>
-    
+
     <script src="script.js"></script>
     <script src="exam.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const enableCheckbox = document.getElementById('setWordLimit');
+            const disableCheckbox = document.getElementById('disableWordLimit');
+            const wordLimitInput = document.getElementById('wordLimit');
+
+            enableCheckbox.addEventListener('change', function () {
+                if (this.checked) {
+                    disableCheckbox.checked = false;
+                    wordLimitInput.disabled = false;
+                }
+            });
+
+            disableCheckbox.addEventListener('change', function () {
+                if (this.checked) {
+                    enableCheckbox.checked = false;
+                    wordLimitInput.disabled = true;
+                }
+            });
+
+            // Initialize the state based on default checked status
+            if (disableCheckbox.checked) {
+                wordLimitInput.disabled = true;
+            }
+        });
+    </script>
 </body>
+
 </html>

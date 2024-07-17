@@ -87,3 +87,98 @@ footer {
 #results th {
     background-color: #f9f9f9;
 }
+
+/*CONTINUOUS  UPDATE*/
+#counter {
+    border: 1px solid #b0bdcc;
+    padding: 10px; /* Increased padding for better spacing */
+    width: 724px;
+    margin: 10px 0; /* Adjusted margins for spacing */
+    text-align: center;
+    font-size: 14px; /* Increased font size for better readability */
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 4px;
+}
+
+.shadow_counter {
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); /* Improved box shadow with transparency */
+    padding: 10px; /* Increased padding for better spacing */
+    margin: 15px 0; /* Adjusted margin for spacing */
+    border: 1px solid #068a81; /* Added missing border style */
+    background-image: linear-gradient(to top right, #43cfefa6 0%, #e536b986 100%); /* Adjusted background color with transparency */
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px; /* Added border radius for rounded corners */
+    text-align: center; /* Center-aligned text */
+}
+
+.counter_box {
+    display: inline-block;
+    padding: 10px 20px; /* Increased padding for better spacing */
+    margin-left: 20px; /* Increased margin for spacing between elements */
+    background-color: #f0f0f0; /* Adjusted background color */
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center-aligned text */
+}
+
+.counter_top {
+    font-size: 16px; /* Increased font size for emphasis */
+    font-weight: bold;
+    margin-bottom: 10px; /* Added margin bottom for spacing */
+}
+
+.counter_middle {
+    background-color: #aacfff;
+    height: 5px; /* Increased height for better visibility */
+    width: 100%;
+    border-radius: 3px; /* Added border radius for rounded appearance */
+}
+
+.counter_bottom {
+    font-size: 12px; /* Increased font size for readability */
+    margin-top: 10px; /* Added margin top for spacing */
+    text-align: center; /* Center-aligned text */
+}
+
+
+/*==================================*/
+
+/* typing */
+#text {
+    width: 714px;
+    border: 2px solid #b0bdcc;
+    font-size: 28px;
+    margin-bottom: 3px;
+    background-color: #f5fcfc;
+    border-radius: 4px;
+    min-height: 23px;
+    padding: 8px 5px;
+    letter-spacing: 2px;
+}
+
+#container {
+    position: relative;
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+
+.correct {
+    background-color: lightgreen;
+}
+/*======================highlighter======================*/
+/* exam.css */
+.highlight {
+    background-color: yellow; /* Adjust highlight color as needed */ /* Your highlight styles */
+}
+
+.incorrect {
+    color: red; /* Red color for incorrectly typed words */
+}
+
+.typed {
+    background-color: rgba(132, 252, 126, 0.789); /* Adjust typed word highlight color as needed *//* Your typed styles */
+}

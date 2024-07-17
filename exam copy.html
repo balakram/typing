@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <style>
+        .correct { color: green; }
+        .incorrect { color: red; }
+    </style>
+    
+    <link rel="stylesheet" href="exam.css">
+</head>
+<body>
+    <div id="settings">
+        <label>
+            <input type="checkbox" id="backspaceToggle" checked>
+            Enable Backspace
+        </label>
+        <label>
+            <input type="checkbox" id="highlightAutoScrollToggle" checked>
+            Enable Highlight & AutoScroll
+        </label>
+    </div>
+    <div id="userName"></div>
+    <div id="timer"></div>
+    <div id="paragraphContainer">
+        <p id="paragraph"></p>
+    </div>
+    <textarea id="typingArea"></textarea>
+    <div id="results" style="display: none;">
+        <!-- Results will be displayed here -->
+    </div>
+    <button id="submit">Submit</button>
+    <button id="saveFile">Save File</button>
+    <button id="restart">Restart</button>
+    <button id="decreaseFontSize">Decrease Font Size</button>
+    <button id="increaseFontSize">Increase Font Size</button>
+    <input type="checkbox" id="showRealTimeStats"> Show Real-Time Stats
+    <div id="realTimeStats">
+        <!-- Real-Time Stats will be displayed here -->
+    </div>
+    <div id="wordLimitDisplay"></div>
+    <input type="number" id="wordLimitValue" placeholder="Set word limit">
+    <script src="script.js"></script>
+</body>
+</html>

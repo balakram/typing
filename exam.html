@@ -7,14 +7,59 @@
     <link rel="stylesheet" href="exam.css">
 </head>
 <body>
-    <div class="container" id="container">
+    <div class="container" id="">
         <h1>English Typing Test</h1>
         <div>
-            User Name: <span id="userName"></span>
+            <div style="font-weight: bold;">User Name:<span style="color: rgb(46, 179, 246);" id="userName"></span></div>
+            <!--<br>
+            <label>
+                <input type="checkbox" id="showRealTimeStats"> Show Real-Time Statistics
+            </label>
+            <label>
+                <input type="checkbox" id="enableBackspace" checked> Enable Backspace
+            </label>
+            <label>
+                <input type="checkbox" id="enableHighlight" checked> Enable Highlight & Autoscroll
+            </label>-->
         </div>
+    
         <div id="timer">01:00</div>
+
+        <div id="realTimeStats" class="shadow_counter counter" style="display: none;">
+            <div class="counter_box">
+              <div id="realTimeGwpm" class="counter_top">0</div>
+              <div class="counter_middle"></div>
+              <div class="counter_bottom">Gross WPM:</div>
+            </div>
+            <div class="counter_box">
+              <div id="realTimeWpm" class="counter_top">0</div>
+              <div class="counter_middle"></div>
+              <div class="counter_bottom">Net WPM</div>
+            </div>
+            <div class="counter_box">
+                <div id="realTimeErrors" class="counter_top">0</div>
+                <div class="counter_middle"></div>
+                <div class="counter_bottom">Errors</div>
+              </div>
+            <div class="counter_box">
+              <div id="realTimeAccuracy" class="counter_top">0%</div>
+              <div class="counter_middle"></div>
+              <div class="counter_bottom">Accuracy</div>
+            </div>
+          </div>
+        
         <div id="paragraph" class="paragraph-container"></div>
+        <div> <label>
+            <input type="checkbox" id="showRealTimeStats"> Show Real-Time Statistics
+        </label>
+        <label>
+            <input type="checkbox" id="enableBackspace" checked> Enable Backspace
+        </label>
+        <label>
+            <input type="checkbox" id="enableHighlight" checked> Enable Highlight & Autoscroll
+        </label></div><br>
         <textarea id="typingArea" placeholder="Start typing here..."></textarea>
+        
         <div class="button-group">
             <button id="decreaseFontSize">A-</button>
             <button id="increaseFontSize">A+</button>
@@ -68,7 +113,7 @@
             <button id="saveFile" style="color: rgb(0, 0, 0);background-color: rgba(131, 255, 48, 0.726);size: 14px;">𝑺𝒂𝒗𝒆 𝑹𝒆𝒔𝒖𝒍𝒕𝒔 𝒕𝒐 𝑭𝒊𝒍𝒆⬇️</button>
         </div>
         <footer>
-            <p>Developed by Balakram Tudu &copy; 2024</p>
+            <p>Developed by Balakram Tudu &copy; 2024 Typing Test</p>
         </footer>
         <input type="hidden" id="wordLimitValue">
     </div>

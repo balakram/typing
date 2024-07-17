@@ -14,18 +14,26 @@ body {
     max-width: 600px;
     margin: 20px;
     padding: 30px;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    background: linear-gradient(135deg, #ffffffb2, #f8f9fa);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
+}
+.container1 {
+    max-width: 600px;
+    margin: 10px;
+    padding: 30px;
+    background: linear-gradient(120deg, #51e4d85b, #af7fe065);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
 }
 
 h1 {
     text-align: center;
     color: #495057;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #007bff, #80bdff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(135deg, #3af4e4, #f89456c6);
+    padding: 10px;
+    border-radius: 8px;
 }
 
 form {
@@ -50,12 +58,14 @@ select,
 textarea,
 input[type="number"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 16px;
     background-color: #f8f9fa;
     transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    outline: none;
 }
 
 input[type="text"]:focus,
@@ -64,7 +74,6 @@ textarea:focus,
 input[type="number"]:focus {
     border-color: #80bdff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
-    outline: none;
 }
 
 input[type="checkbox"],
@@ -76,14 +85,15 @@ button {
     grid-column: 1 / -1;
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    background: linear-gradient(135deg, #7ace2c, #0056b3);
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    border-radius: 4px;
+    border-radius: 25px;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
+    outline: none;
 }
 
 button:hover {
@@ -95,8 +105,27 @@ button:active {
     background: linear-gradient(135deg, #004080, #002a5c);
 }
 
+.button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button a {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-image 0.3s;
+}
+
 a {
-    grid-column: 1 / -1;
     text-align: center;
     color: #007bff;
     text-decoration: none;
@@ -104,14 +133,17 @@ a {
 }
 
 a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    color: #000000;
+    background-image: linear-gradient(to right, #e9ec1f, #6cd624);
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #paragraphDropdowns {
     display: flex;
     flex-direction: column;
     grid-column: 2 / -1;
+    margin-top: 10px;
 }
 
 #defaultParagraphList,
@@ -122,7 +154,98 @@ a:hover {
 footer {
     text-align: center;
     padding: 10px 20px;
-    color: #868e96;
+    color: #000000;
     font-size: 14px;
     margin-top: 20px;
+}
+
+#wordLimit {
+    width: 70px;
+    padding: 8px;
+    border: 2px solid #3087dd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #ffffff75;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#uploadButton {
+    padding: 10px 20px;
+    background-color: #3087dd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#uploadButton:hover {
+    background: linear-gradient(135deg, #7ace2c, #0056b3);
+    transform: translateY(-2px);
+}
+
+#uploadButton:focus {
+    outline: none;
+}
+
+.startExam {
+    padding: 15px 30px;
+    background-image: linear-gradient(to right, #e45c19, #9ee41b);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.startExam:hover {
+    background-color: #5cb85c;
+    transform: translateY(-2px);
+}
+
+.startExam:focus {
+    outline: none;
+}
+
+.startExam1 {
+    padding: 15px 30px;
+    background-image: linear-gradient(to right, #3759f1, #dd49dd);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.startExam1:hover {
+    background-color: #5cb85c;
+    transform: translateY(-2px);
+}
+
+.startExam1:focus {
+    outline: none;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    grid-column: 1 / -1;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-left: 2px;
 }

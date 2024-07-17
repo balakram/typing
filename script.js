@@ -91,7 +91,7 @@ document.getElementById('startExam').addEventListener('click', function() {
     const paragraphType = document.querySelector('input[name="paragraphType"]:checked').value;
     const setWordLimit = document.getElementById('setWordLimit').checked;
     const wordLimit = document.getElementById('wordLimit').value;
-    const backspace = document.getElementById('backspace').checked;
+    const enableBackspace = document.getElementById('enableBackspace').checked;
     const highlightAutoScroll = document.getElementById('highlightAutoScroll').checked;
 
     if (paragraphType === 'custom') {
@@ -167,6 +167,7 @@ document.getElementById('startExam').addEventListener('click', function() {
                 'paragraph (58).txt',
                 'paragraph (59).txt',
                 'paragraph (60).txt'
+                
 
                 
             ];
@@ -198,11 +199,14 @@ document.getElementById('startExam').addEventListener('click', function() {
             text,
             setWordLimit,
             wordLimit,
-            backspace,
+            enableBackspace,
             highlightAutoScroll
         };
 
         localStorage.setItem('examData', JSON.stringify(examData));
         window.location.href = 'exam.html';
     }
+
+
+    
 });

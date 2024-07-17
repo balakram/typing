@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errors++;
             }
         }
-        return errors-1;//error number adjust here
+        return errors;//error number adjust here
     }
 
     // Function to update real-time statistics

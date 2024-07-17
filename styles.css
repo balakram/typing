@@ -1,3 +1,4 @@
+/* General styles (unchanged) */
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: linear-gradient(135deg, #ffecd2, #fcb69f);
@@ -18,6 +19,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 }
+
 .container1 {
     max-width: 600px;
     margin: 10px;
@@ -194,9 +196,9 @@ footer {
     outline: none;
 }
 
-.startExam {
+.startExam,
+.startExam1 {
     padding: 15px 30px;
-    background-image: linear-gradient(to right, #e45c19, #9ee41b);
     color: white;
     border: none;
     border-radius: 50px;
@@ -208,34 +210,21 @@ footer {
     display: inline-block;
 }
 
-.startExam:hover {
-    background-color: #5cb85c;
-    transform: translateY(-2px);
-}
-
-.startExam:focus {
-    outline: none;
+.startExam {
+    background-image: linear-gradient(to right, #e45c19, #9ee41b);
 }
 
 .startExam1 {
-    padding: 15px 30px;
     background-image: linear-gradient(to right, #3759f1, #dd49dd);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    text-decoration: none;
-    display: inline-block;
 }
 
+.startExam:hover,
 .startExam1:hover {
     background-color: #5cb85c;
     transform: translateY(-2px);
 }
 
+.startExam:focus,
 .startExam1:focus {
     outline: none;
 }
@@ -248,4 +237,23 @@ footer {
 
 .checkbox-group input[type="checkbox"] {
     margin-left: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+    
+    .container1 {
+        max-width: 100%;
+    }
+    
+    form {
+        grid-template-columns: 1fr;
+    }
+    
+    button {
+        grid-column: 1;
+    }
 }

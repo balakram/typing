@@ -2,6 +2,8 @@
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      background-image: url("rain.gif");
+      background-repeat: repeat-x;
     color: #212529;
     margin: 0;
     padding: 0;

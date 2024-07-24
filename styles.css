@@ -4,7 +4,7 @@ body {
     background: linear-gradient(135deg, #ffecd2, #fcb69f);
       background-image: url("rain.gif");
       background-repeat: repeat-x;
-     background-size: cover; 
+     background-size: contain; 
     background-position: center; 
     color: #212529;
     margin: 0;
